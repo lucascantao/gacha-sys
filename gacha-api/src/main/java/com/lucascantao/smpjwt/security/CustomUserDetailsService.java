@@ -1,6 +1,7 @@
 package com.lucascantao.smpjwt.security;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,7 +14,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.lucascantao.smpjwt.model.Role;
 import com.lucascantao.smpjwt.model.UserEntity;
 import com.lucascantao.smpjwt.repository.UserRepository;
 
@@ -26,12 +26,9 @@ public class CustomUserDetailsService implements UserDetailsService{
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity user = repository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username not found"));
-        return new User(user.getUsername(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
-    }
-    private Collection<GrantedAuthority> mapRolesToAuthorities(List<Role> roles){
+        Collection<GrantedAuthority> grantedAuthorities = Collections.emptyList();
 
-        return roles.stream().map( role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
-
+        return new User(user.getUsername(), user.getPassword(), grantedAuthorities);
     }
     
 }

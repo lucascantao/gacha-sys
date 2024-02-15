@@ -18,9 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lucascantao.smpjwt.model.AuthResponseDTO;
 import com.lucascantao.smpjwt.model.LoginDTO;
 import com.lucascantao.smpjwt.model.RegisterDTO;
-import com.lucascantao.smpjwt.model.Role;
 import com.lucascantao.smpjwt.model.UserEntity;
-import com.lucascantao.smpjwt.repository.RoleRepository;
 import com.lucascantao.smpjwt.repository.UserRepository;
 import com.lucascantao.smpjwt.security.JWTGenerator;
 
@@ -32,8 +30,6 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private RoleRepository roleRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
@@ -59,9 +55,6 @@ public class AuthController {
         UserEntity user = new UserEntity();
         user.setUsername(register.getUsername());
         user.setPassword(passwordEncoder.encode(register.getPassword()));
-        
-        Role roles = roleRepository.findByName("USER").get();
-        user.setRoles(Collections.singletonList(roles));
 
         userRepository.save(user);
 
