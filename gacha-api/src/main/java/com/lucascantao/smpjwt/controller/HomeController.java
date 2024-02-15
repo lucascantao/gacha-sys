@@ -1,16 +1,40 @@
 package com.lucascantao.smpjwt.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lucascantao.smpjwt.model.CharacterModel;
+import com.lucascantao.smpjwt.model.UserEntity;
+import com.lucascantao.smpjwt.repository.BannerRepository;
+import com.lucascantao.smpjwt.repository.CharacterRepository;
+import com.lucascantao.smpjwt.repository.UserRepository;
+import com.lucascantao.smpjwt.security.JWTGenerator;
+
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("v1/api/home")
 public class HomeController {
+
+    @Autowired
+    JWTGenerator jwtGenerator;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    BannerRepository bannerRepository;
+
+    @Autowired
+    CharacterRepository characterRepository;
+    
 
     @GetMapping("/hello")
     public String hello() {
@@ -23,6 +47,19 @@ public class HomeController {
         @RequestParam int bannerId, 
         @RequestParam int option) {
 
+
+    // pegar usuario do request
+    // adicionar personagem a lista do usuario (a lista vem junto tbm? humm)
+    // salvar usuario
+
+        String username = jwtGenerator.getUsernameFromJWT(request.getHeader("Authorization").split(" ")[1]);
+        UserEntity usuario = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username not found"));
+        
+        List<CharacterModel> character = bannerRepository.findById(bannerId).getCharacters();
+
+        usuario.getCharacters().add(null);
+
+        userRepository.save(usuario);
 
     }
     
