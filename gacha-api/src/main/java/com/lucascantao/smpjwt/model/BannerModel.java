@@ -17,26 +17,26 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "users")
+@Table(name = "banner")
 @Data
 @NoArgsConstructor
-public class UserEntity {
+public class BannerModel {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int id;
-
-    private String username;
-
-    private String password;
-
-    private int pulls;
+    private int id;
+    
+    private String name;
+    
+    private int pity;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-        name = "user_characters",
+        name = "banner_characters",
         joinColumns = @JoinColumn(name = "character_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
+        inverseJoinColumns = @JoinColumn(name = "banner_id", referencedColumnName = "id")
     )
     private List<CharacterModel> characters = new ArrayList<>();
+
+
 }
