@@ -1,14 +1,13 @@
 package com.lucascantao.smpjwt.repository;
 
-import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.lucascantao.smpjwt.model.CharacterModel;
 
-public interface CharacterRepository extends JpaRepository<CharacterModel, Integer>{
-    
+public interface CharacterRepository extends JpaRepository<CharacterModel, Integer> {
+
     CharacterModel findById(int id);
+
     CharacterModel findByName(String name);
 
 }
