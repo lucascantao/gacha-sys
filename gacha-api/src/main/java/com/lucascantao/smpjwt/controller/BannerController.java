@@ -1,5 +1,7 @@
 package com.lucascantao.smpjwt.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,9 +38,15 @@ public class BannerController {
         return ResponseEntity.ok("Ok");
     }
 
+    @GetMapping
+    public ResponseEntity<List<BannerModel>> listBanner() {
+        List<BannerModel> bannerList = bannerRepository.findAll();
+        return ResponseEntity.ok().body(bannerList);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<String> createBanner(@RequestBody BannerDTO banner) {
-        if(!bannerRepository.existsByName(banner.getName())){
+        if (!bannerRepository.existsByName(banner.getName())) {
             BannerModel model = new BannerModel();
             model.setName(banner.getName());
             bannerRepository.save(model);
@@ -46,5 +54,5 @@ public class BannerController {
         }
         return ResponseEntity.ok("name already exists");
     }
-    
+
 }
