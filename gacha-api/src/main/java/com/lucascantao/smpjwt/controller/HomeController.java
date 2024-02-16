@@ -53,7 +53,7 @@ public class HomeController {
     // salvar usuario
 
         String username = jwtGenerator.getUsernameFromJWT(request.getHeader("Authorization").split(" ")[1]);
-        UserEntity usuario = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username not found"));
+        UserEntity usuario = userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("Username not found"));
         
         List<CharacterModel> character = bannerRepository.findById(bannerId).getCharacters();
 

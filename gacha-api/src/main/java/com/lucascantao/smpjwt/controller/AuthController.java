@@ -48,12 +48,13 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterDTO register) {
-        if (userRepository.existsByUsername(register.getUsername())) {
+        if (userRepository.existsByEmail(register.getEmail())) {
             return new ResponseEntity<>("username already existed", HttpStatus.BAD_REQUEST);
         }
 
         UserEntity user = new UserEntity();
-        user.setUsername(register.getUsername());
+        user.setName(register.getName());
+        user.setEmail(register.getEmail());
         user.setPassword(passwordEncoder.encode(register.getPassword()));
 
         userRepository.save(user);

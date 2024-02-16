@@ -17,7 +17,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user_table")
 @Data
 @NoArgsConstructor
 public class UserEntity {
@@ -26,7 +26,9 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int id;
 
-    private String username;
+    private String name;
+
+    private String email;
 
     private String password;
 
