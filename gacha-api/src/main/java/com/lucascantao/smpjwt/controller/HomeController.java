@@ -20,7 +20,7 @@ import com.lucascantao.smpjwt.security.JWTGenerator;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("v1/api/home")
+@RequestMapping("/api/home")
 public class HomeController {
 
     @Autowired
@@ -44,13 +44,8 @@ public class HomeController {
     @PostMapping("/pull-banner/{id}/{option}")
     public void addPulls(
         HttpServletRequest request,
-        @RequestParam int bannerId, 
+        @RequestParam int bannerId,
         @RequestParam int option) {
-
-
-    // pegar usuario do request
-    // adicionar personagem a lista do usuario (a lista vem junto tbm? humm)
-    // salvar usuario
 
         String username = jwtGenerator.getUsernameFromJWT(request.getHeader("Authorization").split(" ")[1]);
         UserEntity usuario = userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("Username not found"));

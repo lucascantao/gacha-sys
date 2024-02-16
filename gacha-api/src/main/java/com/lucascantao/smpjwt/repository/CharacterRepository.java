@@ -8,6 +8,7 @@ import com.lucascantao.smpjwt.model.CharacterModel;
 
 public interface CharacterRepository extends JpaRepository<CharacterModel, Integer>{
     
-    Optional<CharacterModel> findById(int id);
+    CharacterModel findById(int id);
+    CharacterModel findByName(String name);
 
 }

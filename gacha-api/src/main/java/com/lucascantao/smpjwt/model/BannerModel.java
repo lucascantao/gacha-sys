@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -28,13 +29,14 @@ public class BannerModel {
     
     private String name;
     
+    @Column(columnDefinition = "integer default 0")
     private int pity;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
         name = "banner_characters",
-        joinColumns = @JoinColumn(name = "character_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "banner_id", referencedColumnName = "id")
+        joinColumns = @JoinColumn(name = "banner_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "character_id", referencedColumnName = "id")
     )
     private List<CharacterModel> characters = new ArrayList<>();
 
