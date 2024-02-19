@@ -1,0 +1,15 @@
+spring:
+    datasource:
+        url: jdbc:postgresql://localhost:5432/gachadb
+        username: admin
+        password: postgres
+        driver-class-name: org.postgresql.Driver
+    jpa:
+        hibernate:
+            ddl-auto: create-drop
+
+        show-sql: true
+        defer-datasource-initialization: true
+    sql:
+        init:
+            mode: always
