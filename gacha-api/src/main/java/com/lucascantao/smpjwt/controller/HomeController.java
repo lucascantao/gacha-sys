@@ -1,8 +1,10 @@
 package com.lucascantao.smpjwt.controller;
 
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,20 +43,35 @@ public class HomeController {
         return "Hello Would!";
     }
 
-    @PostMapping("/pull-banner/{id}/{option}")
-    public void addPulls(
+
+    /**
+     * 
+     * @param request user information
+     * @param bannerId banner to pull from
+     * @param option quantity of pulls to use
+     */
+    @PostMapping("/pull")
+    public ResponseEntity<CharacterModel> addPulls(
         HttpServletRequest request,
         @RequestParam int bannerId,
         @RequestParam int option) {
 
         String username = jwtGenerator.getUsernameFromJWT(request.getHeader("Authorization").split(" ")[1]);
         UserEntity usuario = userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("Username not found"));
-        
-        List<CharacterModel> character = bannerRepository.findById(bannerId).getCharacters();
 
-        usuario.getCharacters().add(null);
+        Random rand = new Random();
+        
+        List<CharacterModel> characterList = bannerRepository.findById(bannerId).getCharacters();
+
+        Integer pull = rand.nextInt(characterList.size());
+
+        CharacterModel character = characterList.get(pull);
+
+        usuario.getCharacters().add(character);
 
         userRepository.save(usuario);
+
+        return ResponseEntity.ok().body(character);
 
     }
     
