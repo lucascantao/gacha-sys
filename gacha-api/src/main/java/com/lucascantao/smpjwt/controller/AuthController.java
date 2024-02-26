@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lucascantao.smpjwt.model.AuthResponseDTO;
-import com.lucascantao.smpjwt.model.LoginDTO;
-import com.lucascantao.smpjwt.model.RegisterDTO;
+import com.lucascantao.smpjwt.dto.AuthResponseDTO;
+import com.lucascantao.smpjwt.dto.LoginDTO;
+import com.lucascantao.smpjwt.dto.RegisterDTO;
 import com.lucascantao.smpjwt.model.UserEntity;
 import com.lucascantao.smpjwt.repository.UserRepository;
 import com.lucascantao.smpjwt.security.JWTGenerator;
