@@ -1,4 +1,4 @@
-package com.lucascantao.smpjwt.model;
+package com.lucascantao.smpjwt.dto;
 
 import lombok.Data;
 import lombok.Getter;
