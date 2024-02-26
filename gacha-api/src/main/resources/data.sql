@@ -12,3 +12,8 @@ INSERT INTO character (tier, bio, name) VALUES(4, 'Unlucky Boy', 'Bennet');
 INSERT INTO character (tier, bio, name) VALUES(4, 'Cryon Num', 'Rosaria');
 INSERT INTO character (tier, bio, name) VALUES(4, 'Favonious Alchemist', 'Sucrose');
 INSERT INTO character (tier, bio, name) VALUES(5, 'Firecracker Girl', 'Yoimiya');
+
+INSERT INTO banner_characters (banner_id, character_id) VALUES (1, 4);
+INSERT INTO banner_characters (banner_id, character_id) VALUES (1, 5);
+INSERT INTO banner_characters (banner_id, character_id) VALUES (1, 6);
+INSERT INTO banner_characters (banner_id, character_id) VALUES (1, 7);
