@@ -28,7 +28,7 @@ public class BannerController {
     @Autowired
     BannerRepository bannerRepository;
 
-    @GetMapping("/addCharacter")
+    @GetMapping("/add")
     public ResponseEntity<String> addCharacter(@RequestParam int banner_id, @RequestParam String character_name) {
         BannerModel banner = bannerRepository.findById(banner_id);
         CharacterModel character = characterRepository.findByName(character_name);
@@ -44,7 +44,7 @@ public class BannerController {
         return ResponseEntity.ok().body(bannerList);
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<String> createBanner(@RequestBody BannerDTO banner) {
         if (!bannerRepository.existsByName(banner.getName())) {
             BannerModel model = new BannerModel();
