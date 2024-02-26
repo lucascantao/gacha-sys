@@ -14,6 +14,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -21,6 +23,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "banner")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class BannerModel {
     
     @Id
@@ -28,9 +32,6 @@ public class BannerModel {
     private int id;
     
     private String name;
-    
-    @Column(columnDefinition = "integer default 0")
-    private int pity;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
