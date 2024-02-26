@@ -1,4 +1,4 @@
-INSERT INTO user_table (name, email, password, pulls) VALUES('user', 'user@email.com', '$2a$12$XrOvnti4NJAzdeOA2KP/sevaog.fRuG3QpxMbNn2oC83m8zexz2Oe', 36);
+INSERT INTO user_table (name, email, password, pulls) VALUES('user', 'user@email.com', '$2a$12$XrOvnti4NJAzdeOA2KP/sevaog.fRuG3QpxMbNn2oC83m8zexz2Oe', 90);
 
 INSERT INTO banner (name) VALUES('Favonious Festival');
 

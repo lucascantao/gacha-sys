@@ -1,7 +1,10 @@
 package com.lucascantao.smpjwt.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.SplittableRandom;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +54,7 @@ public class HomeController {
      * @param option quantity of pulls to use
      */
     @PostMapping("/pull")
-    public ResponseEntity<CharacterModel> addPulls(
+    public ResponseEntity<List<CharacterModel>> addPulls(
         HttpServletRequest request,
         @RequestParam int bannerId,
         @RequestParam int option) {
@@ -59,20 +62,33 @@ public class HomeController {
         String username = jwtGenerator.getUsernameFromJWT(request.getHeader("Authorization").split(" ")[1]);
         UserEntity usuario = userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("Username not found"));
 
-        Random rand = new Random();
-        
-        List<CharacterModel> characterList = bannerRepository.findById(bannerId).getCharacters();
+        if(usuario.getPulls() < option){
+            return ResponseEntity.badRequest().body(null);
+        }
 
-        Integer pull = rand.nextInt(characterList.size());
+        List<CharacterModel> resultList = new ArrayList<>();
 
-        CharacterModel character = characterList.get(pull);
-
-        usuario.getCharacters().add(character);
-
+        for(int i = 0; i < option; i++) {
+            List<CharacterModel> characterList = bannerRepository.findById(bannerId).getCharacters();
+            CharacterModel character = getCharacterProbability(characterList);
+            resultList.add(character);
+            if(!usuario.getCharacters().contains(character))
+                usuario.getCharacters().add(character);
+            usuario.setPulls(usuario.getPulls() - 1);
+        }
         userRepository.save(usuario);
 
-        return ResponseEntity.ok().body(character);
+        return ResponseEntity.ok().body(resultList);
 
+    }
+
+    private CharacterModel getCharacterProbability(List<CharacterModel> list) {
+        SplittableRandom random = new SplittableRandom();
+        boolean t5probability = random.nextInt(100)==0;
+        
+        if(t5probability)
+            return list.stream().filter(character -> character.getTier()==5).collect(Collectors.toList()).get(0);
+        return list.stream().filter(character -> character.getTier()==4).collect(Collectors.toList()).get(random.nextInt(list.size() - 1));
     }
     
 }
