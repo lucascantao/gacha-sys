@@ -13,6 +13,8 @@ public class PityModel {
     @EmbeddedId
     PityModelId id;
 
-    Integer pity;
+    Integer t5Pity;
+
+    Integer t4Pity;
 
 }
