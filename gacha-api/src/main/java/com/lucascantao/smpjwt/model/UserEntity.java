@@ -43,4 +43,12 @@ public class UserEntity {
         inverseJoinColumns = @JoinColumn(name = "character_id", referencedColumnName = "id")
     )
     private Set<CharacterModel> characters = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "user_weapon",
+        joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "weapon_id", referencedColumnName = "id")
+    )
+    private List<WeaponModel> weapons = new ArrayList<>();
 }

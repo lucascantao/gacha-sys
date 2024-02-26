@@ -3,6 +3,26 @@ INSERT INTO user_table (name, email, password, pulls) VALUES('user', 'user@email
 INSERT INTO banner (name) VALUES('Favonious Festival');
 INSERT INTO pity (banner_id, t4pity, t5pity, user_id) VALUES (1, 0, 0, 1);
 
+INSERT INTO weapon (name, tier) VALUES ('White Tassel', 3);
+INSERT INTO weapon (name, tier) VALUES ('White Iron Greatsword', 3);
+INSERT INTO weapon (name, tier) VALUES ('Twin Nephrite', 3);
+INSERT INTO weapon (name, tier) VALUES ('Traveler"s Handy Sword', 3);
+INSERT INTO weapon (name, tier) VALUES ('Thrilling Tales of Dragon Slayers', 3);
+INSERT INTO weapon (name, tier) VALUES ('Slingshot', 3);
+INSERT INTO weapon (name, tier) VALUES ('Skyrider Greatsword', 3);
+INSERT INTO weapon (name, tier) VALUES ('Sharpshooter"s Oath', 3);
+INSERT INTO weapon (name, tier) VALUES ('Whiteblind', 4);
+INSERT INTO weapon (name, tier) VALUES ('The Widsith', 4);
+INSERT INTO weapon (name, tier) VALUES ('Favonius Sword', 4);
+INSERT INTO weapon (name, tier) VALUES ('Dragon"s Bane', 4);
+INSERT INTO weapon (name, tier) VALUES ('Thundering Pulse', 5);
+INSERT INTO weapon (name, tier) VALUES ('Staff of Homa', 5);
+INSERT INTO weapon (name, tier) VALUES ('Skyward Pride', 5);
+INSERT INTO weapon (name, tier) VALUES ('Mistsplitter Reforged', 5);
+INSERT INTO weapon (name, tier) VALUES ('Crane"s Echoing Call', 5);
+
+
+
 INSERT INTO character (tier, bio, name) VALUES(5, 'Funerary Director', 'Hu Tao');
 INSERT INTO character (tier, bio, name) VALUES(5, 'Geo Archon', 'Zhongli');
 INSERT INTO character (tier, bio, name) VALUES(5, 'Hydro Archon', 'Furina');
