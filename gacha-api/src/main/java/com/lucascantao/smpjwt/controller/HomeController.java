@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lucascantao.smpjwt.model.CharacterModel;
+import com.lucascantao.smpjwt.model.PityModel;
+import com.lucascantao.smpjwt.model.PityModelId;
 import com.lucascantao.smpjwt.model.UserEntity;
 import com.lucascantao.smpjwt.repository.BannerRepository;
 import com.lucascantao.smpjwt.repository.CharacterRepository;
+import com.lucascantao.smpjwt.repository.PityRepository;
 import com.lucascantao.smpjwt.repository.UserRepository;
 import com.lucascantao.smpjwt.security.JWTGenerator;
 
@@ -39,6 +42,9 @@ public class HomeController {
 
     @Autowired
     CharacterRepository characterRepository;
+
+    @Autowired
+    PityRepository pityRepository;
     
 
     @GetMapping("/hello")
@@ -61,6 +67,7 @@ public class HomeController {
 
         String username = jwtGenerator.getUsernameFromJWT(request.getHeader("Authorization").split(" ")[1]);
         UserEntity usuario = userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("Username not found"));
+        PityModel pity = pityRepository.findById(PityModelId.builder().bannerId(bannerId).userId(usuario.getId()).build()).orElseThrow();
 
         if(usuario.getPulls() < option){
             return ResponseEntity.badRequest().body(null);
@@ -70,35 +77,43 @@ public class HomeController {
 
         for(int i = 0; i < option; i++) {
             List<CharacterModel> characterList = bannerRepository.findById(bannerId).getCharacters();
-            CharacterModel character = getCharacterProbability(characterList);
-            resultList.add(character);
-            if(!usuario.getCharacters().contains(character))
+            CharacterModel character = null;
+            
+
+            if(!usuario.getCharacters().contains(character)){
+                SplittableRandom random = new SplittableRandom();
+                boolean t5probability = random.nextInt(100)==0;
+                boolean t4probability = random.nextInt(100)==0;
+
+                List<CharacterModel> t5 = characterList.stream().filter(c -> c.getTier()==5).collect(Collectors.toList());
+                List<CharacterModel> t4 = characterList.stream().filter(c -> c.getTier()==4).collect(Collectors.toList());
+
+                pity.setT4Pity(pity.getT5Pity() + 1);
+                pity.setT5Pity(pity.getT5Pity() + 1);
+
+                if(t5probability){
+                    character = t5.get(0);
+                    pity.setT5Pity(0);
+                }
+                else if(t4probability){
+                    character = t4.get(random.nextInt(t4.size()));
+                    pity.setT4Pity(0);
+                }
+                else{
+                    character = characterRepository.findByName("Qiqi");
+                }   
+                
                 usuario.getCharacters().add(character);
-            usuario.setPulls(usuario.getPulls() - 1);
+                resultList.add(character);
+                usuario.setPulls(usuario.getPulls() - 1);
+                
+            }
+                
         }
         userRepository.save(usuario);
 
         return ResponseEntity.ok().body(resultList);
 
-    }
-
-    private CharacterModel getCharacterProbability(List<CharacterModel> list) {
-        SplittableRandom random = new SplittableRandom();
-        boolean t5probability = random.nextInt(100)==0;
-        boolean t4probability = random.nextInt(100)==0;
-
-        List<CharacterModel> t5 = list.stream().filter(character -> character.getTier()==5).collect(Collectors.toList());
-        List<CharacterModel> t4 = list.stream().filter(character -> character.getTier()==4).collect(Collectors.toList());
-
-        if(t5probability)
-            return t5.get(0);
-        else if(t4probability)
-            return t4.get(random.nextInt(t4.size()));
-        else{
-            // List<CharacterModel> allCharacters = characterRepository.findAll();
-            return characterRepository.findByName("Qiqi");
-        }
-            
     }
     
 }
