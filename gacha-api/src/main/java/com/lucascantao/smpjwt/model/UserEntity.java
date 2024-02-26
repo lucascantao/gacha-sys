@@ -1,7 +1,9 @@
 package com.lucascantao.smpjwt.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -40,5 +42,5 @@ public class UserEntity {
         joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "character_id", referencedColumnName = "id")
     )
-    private List<CharacterModel> characters = new ArrayList<>();
+    private Set<CharacterModel> characters = new HashSet<>();
 }

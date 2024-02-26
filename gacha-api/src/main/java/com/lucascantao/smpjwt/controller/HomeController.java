@@ -45,75 +45,69 @@ public class HomeController {
 
     @Autowired
     PityRepository pityRepository;
-    
 
     @GetMapping("/hello")
     public String hello() {
         return "Hello Would!";
     }
 
-
     /**
      * 
-     * @param request user information
+     * @param request  user information
      * @param bannerId banner to pull from
-     * @param option quantity of pulls to use
+     * @param option   quantity of pulls to use
      */
     @PostMapping("/pull")
     public ResponseEntity<List<CharacterModel>> addPulls(
-        HttpServletRequest request,
-        @RequestParam int bannerId,
-        @RequestParam int option) {
+            HttpServletRequest request,
+            @RequestParam int bannerId,
+            @RequestParam int option) {
 
         String username = jwtGenerator.getUsernameFromJWT(request.getHeader("Authorization").split(" ")[1]);
         UserEntity usuario = userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("Username not found"));
         PityModel pity = pityRepository.findById(PityModelId.builder().bannerId(bannerId).userId(usuario.getId()).build()).orElseThrow();
 
-        if(usuario.getPulls() < option){
+        if (usuario.getPulls() < option) {
             return ResponseEntity.badRequest().body(null);
         }
 
         List<CharacterModel> resultList = new ArrayList<>();
 
-        for(int i = 0; i < option; i++) {
+        for (int i = 0; i < option; i++) {
+
+            pity.setT4Pity(pity.getT4Pity() + 1);
+            pity.setT5Pity(pity.getT5Pity() + 1);
+
             List<CharacterModel> characterList = bannerRepository.findById(bannerId).getCharacters();
             CharacterModel character = null;
-            
 
-            if(!usuario.getCharacters().contains(character)){
-                SplittableRandom random = new SplittableRandom();
-                boolean t5probability = random.nextInt(100)==0;
-                boolean t4probability = random.nextInt(100)==0;
+            SplittableRandom random = new SplittableRandom();
+            boolean t5probability = random.nextInt(100) == 0;
+            boolean t4probability = random.nextInt(100) == 0;
 
-                List<CharacterModel> t5 = characterList.stream().filter(c -> c.getTier()==5).collect(Collectors.toList());
-                List<CharacterModel> t4 = characterList.stream().filter(c -> c.getTier()==4).collect(Collectors.toList());
+            List<CharacterModel> t5 = characterList.stream().filter(c -> c.getTier() == 5).collect(Collectors.toList());
+            List<CharacterModel> t4 = characterList.stream().filter(c -> c.getTier() == 4).collect(Collectors.toList());
 
-                pity.setT4Pity(pity.getT5Pity() + 1);
-                pity.setT5Pity(pity.getT5Pity() + 1);
-
-                if(t5probability){
-                    character = t5.get(0);
-                    pity.setT5Pity(0);
-                }
-                else if(t4probability){
-                    character = t4.get(random.nextInt(t4.size()));
-                    pity.setT4Pity(0);
-                }
-                else{
-                    character = characterRepository.findByName("Qiqi");
-                }   
-                
-                usuario.getCharacters().add(character);
-                resultList.add(character);
-                usuario.setPulls(usuario.getPulls() - 1);
-                
+            if (t5probability || pity.getT5Pity() >= 90) {
+                character = t5.get(0);
+                pity.setT5Pity(0);
+            } else if (t4probability || pity.getT4Pity() >= 10) {
+                character = t4.get(random.nextInt(t4.size()));
+                pity.setT4Pity(0);
+            } else {
+                character = characterRepository.findByName("Qiqi");
             }
-                
+
+            usuario.getCharacters().add(character);
+            resultList.add(character);
+            usuario.setPulls(usuario.getPulls() - 1);
         }
+
         userRepository.save(usuario);
+        pityRepository.save(pity);
 
         return ResponseEntity.ok().body(resultList);
 
     }
-    
+
 }
