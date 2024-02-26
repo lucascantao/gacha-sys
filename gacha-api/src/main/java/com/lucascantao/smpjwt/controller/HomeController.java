@@ -85,10 +85,20 @@ public class HomeController {
     private CharacterModel getCharacterProbability(List<CharacterModel> list) {
         SplittableRandom random = new SplittableRandom();
         boolean t5probability = random.nextInt(100)==0;
-        
+        boolean t4probability = random.nextInt(100)==0;
+
+        List<CharacterModel> t5 = list.stream().filter(character -> character.getTier()==5).collect(Collectors.toList());
+        List<CharacterModel> t4 = list.stream().filter(character -> character.getTier()==4).collect(Collectors.toList());
+
         if(t5probability)
-            return list.stream().filter(character -> character.getTier()==5).collect(Collectors.toList()).get(0);
-        return list.stream().filter(character -> character.getTier()==4).collect(Collectors.toList()).get(random.nextInt(list.size() - 1));
+            return t5.get(0);
+        else if(t4probability)
+            return t4.get(random.nextInt(t4.size()));
+        else{
+            // List<CharacterModel> allCharacters = characterRepository.findAll();
+            return characterRepository.findByName("Qiqi");
+        }
+            
     }
     
 }
