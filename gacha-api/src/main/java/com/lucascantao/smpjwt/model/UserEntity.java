@@ -37,8 +37,8 @@ public class UserEntity {
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
         name = "user_characters",
-        joinColumns = @JoinColumn(name = "character_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
+        joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "character_id", referencedColumnName = "id")
     )
     private List<CharacterModel> characters = new ArrayList<>();
 }
