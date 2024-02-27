@@ -58,55 +58,63 @@ public class HomeController {
      * @param option   quantity of pulls to use
      */
     @PostMapping("/pull")
-    public ResponseEntity<List<CharacterModel>> addPulls(
+    public ResponseEntity<CharacterModel> addPulls(
             HttpServletRequest request,
-            @RequestParam int bannerId,
-            @RequestParam int option) {
+            @RequestParam int bannerId) {
 
         String username = jwtGenerator.getUsernameFromJWT(request.getHeader("Authorization").split(" ")[1]);
-        UserEntity usuario = userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("Username not found"));
-        PityModel pity = pityRepository.findById(PityModelId.builder().bannerId(bannerId).userId(usuario.getId()).build()).orElseThrow();
+        UserEntity usuario = userRepository.findByEmail(username).orElseThrow( () -> new UsernameNotFoundException("Username not found"));
+        
+        List<CharacterModel> characterList = bannerRepository.findById(bannerId).getCharacters();
+        List<CharacterModel> t5 = characterList.stream().filter(c -> c.getTier() == 5).collect(Collectors.toList());
+        List<CharacterModel> t4 = characterList.stream().filter(c -> c.getTier() == 4).collect(Collectors.toList());
 
-        if (usuario.getPulls() < option) {
-            return ResponseEntity.badRequest().body(null);
+        PityModelId pityModelId = PityModelId.builder()
+                                            .bannerId(bannerId)
+                                            .userId(usuario.getId())
+                                            .build();
+
+
+        if(!pityRepository.existsById(pityModelId)){
+            PityModel pity = PityModel.builder()
+                                    .id(pityModelId)
+                                    .t4Pity(0)
+                                    .t5Pity(0)
+                                    .build();
+            pityRepository.save(pity);
         }
 
-        List<CharacterModel> resultList = new ArrayList<>();
+        PityModel pity = pityRepository.findById(pityModelId).orElseThrow();
 
-        for (int i = 0; i < option; i++) {
+        pity.setT4Pity(pity.getT4Pity() + 1);
+        pity.setT5Pity(pity.getT5Pity() + 1);
 
-            pity.setT4Pity(pity.getT4Pity() + 1);
-            pity.setT5Pity(pity.getT5Pity() + 1);
+        CharacterModel character = null;
 
-            List<CharacterModel> characterList = bannerRepository.findById(bannerId).getCharacters();
-            CharacterModel character = null;
+        SplittableRandom random = new SplittableRandom();
+        boolean t5probability = random.nextInt(100) == 0;
+        boolean t4probability = random.nextInt(100) == 0;
+            
 
-            SplittableRandom random = new SplittableRandom();
-            boolean t5probability = random.nextInt(100) == 0;
-            boolean t4probability = random.nextInt(100) == 0;
+        if (t5probability || pity.getT5Pity() >= 90) {
 
-            List<CharacterModel> t5 = characterList.stream().filter(c -> c.getTier() == 5).collect(Collectors.toList());
-            List<CharacterModel> t4 = characterList.stream().filter(c -> c.getTier() == 4).collect(Collectors.toList());
+            character = t5.get(0);
+            pity.setT5Pity(0);
 
-            if (t5probability || pity.getT5Pity() >= 90) {
-                character = t5.get(0);
-                pity.setT5Pity(0);
-            } else if (t4probability || pity.getT4Pity() >= 10) {
-                character = t4.get(random.nextInt(t4.size()));
-                pity.setT4Pity(0);
-            } else {
-                character = characterRepository.findByName("Qiqi");
-            }
+        } else if (t4probability || pity.getT4Pity() >= 10) {
+            
+            character = t4.get(random.nextInt(t4.size()));
+            pity.setT4Pity(0);
 
-            usuario.getCharacters().add(character);
-            resultList.add(character);
-            usuario.setPulls(usuario.getPulls() - 1);
         }
+
+        usuario.getCharacters().add(character);
+        usuario.setPulls(usuario.getPulls() - 1);
 
         userRepository.save(usuario);
         pityRepository.save(pity);
 
-        return ResponseEntity.ok().body(resultList);
+        return ResponseEntity.ok().body(character);
 
     }
 

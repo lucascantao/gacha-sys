@@ -11,4 +11,6 @@ public interface PityRepository extends JpaRepository<PityModel, PityModelId>{
     
     Optional<PityModel> findById(PityModelId id);
 
+    boolean existsById(PityModelId id);
+
 }
