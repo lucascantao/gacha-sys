@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -39,6 +38,7 @@ public class BannerModel {
         joinColumns = @JoinColumn(name = "banner_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "character_id", referencedColumnName = "id")
     )
+    @Builder.Default
     private List<CharacterModel> characters = new ArrayList<>();
 
 
