@@ -1,6 +1,5 @@
 package com.lucascantao.smpjwt.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.SplittableRandom;
@@ -19,16 +18,18 @@ import com.lucascantao.smpjwt.model.CharacterModel;
 import com.lucascantao.smpjwt.model.PityModel;
 import com.lucascantao.smpjwt.model.PityModelId;
 import com.lucascantao.smpjwt.model.UserEntity;
+import com.lucascantao.smpjwt.model.WeaponModel;
 import com.lucascantao.smpjwt.repository.BannerRepository;
 import com.lucascantao.smpjwt.repository.CharacterRepository;
 import com.lucascantao.smpjwt.repository.PityRepository;
 import com.lucascantao.smpjwt.repository.UserRepository;
+import com.lucascantao.smpjwt.repository.WeaponRepository;
 import com.lucascantao.smpjwt.security.JWTGenerator;
 
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/api/home")
+@RequestMapping("/api/pull")
 public class HomeController {
 
     @Autowired
@@ -46,6 +47,9 @@ public class HomeController {
     @Autowired
     PityRepository pityRepository;
 
+    @Autowired
+    WeaponRepository weaponRepository;
+
     @GetMapping("/hello")
     public String hello() {
         return "Hello Would!";
@@ -57,7 +61,7 @@ public class HomeController {
      * @param bannerId banner to pull from
      * @param option   quantity of pulls to use
      */
-    @PostMapping("/pull")
+    @PostMapping("/character")
     public ResponseEntity<CharacterModel> addPulls(
             HttpServletRequest request,
             @RequestParam int bannerId) {
@@ -115,6 +119,23 @@ public class HomeController {
         pityRepository.save(pity);
 
         return ResponseEntity.ok().body(character);
+
+    }
+
+    @PostMapping("/t3")
+    public ResponseEntity<WeaponModel> gett3(HttpServletRequest request) {
+
+        String username = jwtGenerator.getUsernameFromJWT(request.getHeader("Authorization").split(" ")[1]);
+        UserEntity usuario = userRepository.findByEmail(username).orElseThrow( () -> new UsernameNotFoundException("Username not found"));
+
+        List<WeaponModel> weaponList = weaponRepository.findAll();
+        List<WeaponModel> t3 = weaponList.stream().filter(w -> w.getTier() == 3).collect(Collectors.toList());
+        WeaponModel weapon = t3.get(new Random().nextInt(t3.size()));
+
+        usuario.getWeapons().add(weapon);
+        userRepository.save(usuario);
+
+        return ResponseEntity.ok().body(weapon);
 
     }
 
