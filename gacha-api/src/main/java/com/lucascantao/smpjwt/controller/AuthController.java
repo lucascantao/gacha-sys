@@ -63,14 +63,6 @@ public class AuthController {
         return new ResponseEntity<>("username registered", HttpStatus.OK);
     }
 
-    @GetMapping("/getUserToken")
-    public ResponseEntity<UserEntity> getUser(HttpServletRequest request) {
-        String username = jwtGenerator.getUsernameFromJWT(request.getHeader("Authorization").split("Bearer ")[0]);
-        UserEntity user = userRepository.findByEmail(username).orElseThrow();
-        if(user!=null){
-            return ResponseEntity.ok().body(user);
-        }
-        return ResponseEntity.badRequest().body(null);
-    }
+    
     
 }
