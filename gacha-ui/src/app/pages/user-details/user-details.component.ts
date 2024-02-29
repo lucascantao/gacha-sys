@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UuarioService } from '../service/usuario.service';
-import { Usuario } from '../models/usuario';
+import { UuarioService } from '../../service/usuario.service';
+import { Usuario } from '../../models/usuario';
 import { NgFor, NgIf } from '@angular/common';
 
 @Component({

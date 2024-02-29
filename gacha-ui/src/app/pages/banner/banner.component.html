@@ -1,0 +1,18 @@
+<div *ngIf="_banners!=null">
+
+    <div *ngFor="let banner of _banners">
+        
+        <p>{{banner.name}}</p>
+        <div *ngFor="let character of banner.characters" class="flex">
+            <p>{{character.name}}</p>
+            <p>{{character.tier}}</p>
+        </div>
+
+        <button (click)="pull(banner.id, 1)" class="bg-amber-500 text-amber-50 font-semibold px-4 py-2 rounded hover:bg-amber-400">Pull 1x</button>
+        
+        <div *ngIf="_showCard">
+            <app-pull-card [character]="_pull_character" [weapon]="_pull_weapon"></app-pull-card>
+        </div>
+    </div>
+
+</div>

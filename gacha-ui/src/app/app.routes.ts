@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { BannerComponent } from './banner/banner.component';
-import { LoginComponent } from './login/login.component';
+import { BannerComponent } from './pages/banner/banner.component';
+import { LoginComponent } from './pages/login/login.component';
 import { authGuard } from './utils/auth.guard';
-import { UserDetailsComponent } from './user-details/user-details.component';
+import { UserDetailsComponent } from './pages/user-details/user-details.component';
 
 export const routes: Routes = [
     // {path: '', redirectTo: 'banner', pathMatch: 'full'},
