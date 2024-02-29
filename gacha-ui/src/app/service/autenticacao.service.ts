@@ -12,19 +12,10 @@ export class AutenticacaoService {
 
     constructor(private http:HttpClient) {}
 
-    login(username: string, password: string) {
+    authenticate(username: string, password: string) {
         const usuario = {username: username, password: password}
-        
         return this.http.post<any>(this.api+this.loginUrl, usuario, {headers: { 'login' : 'I HAVE TO FIX THIS, CMON!!'}});
     }
 
-    isAuthenticated() {
-        // return this.http.get<boolean>(this.api+'/user/getUserToken').subscribe({
-        //     next: r => true,
-        //     error: e => false
-        // })
-
-        return false;
-    }
 
 }

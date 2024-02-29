@@ -1,0 +1,16 @@
+<div *ngIf="_userDetails!=null">
+    <h1>{{_userDetails.name}}</h1>
+    
+    
+    <p>characters</p>
+    <div>
+        <p *ngFor="let character of _userDetails.characters"> {{character.name}} </p>
+    </div>
+
+    <p>weapons</p>
+    <div>
+        <p *ngFor="let weapon of _userDetails.weapons"> {{weapon.name}} </p>
+    </div>
+
+
+</div>
