@@ -25,7 +25,8 @@ public class UserContoller {
 
     @GetMapping("/getUserToken")
     public ResponseEntity<UserEntity> getUser(HttpServletRequest request) {
-        String username = jwtGenerator.getUsernameFromJWT(request.getHeader("Authorization").split("Bearer ")[0]);
+        String token = request.getHeader("Authorization").split(" ")[1];
+        String username = jwtGenerator.getUsernameFromJWT(token);
         UserEntity user = userRepository.findByEmail(username).orElseThrow();
         if(user!=null){
             return ResponseEntity.ok().body(user);
