@@ -48,6 +48,9 @@ public class BannerController {
         if (!bannerRepository.existsByName(banner.getName())) {
             BannerModel model = new BannerModel();
             model.setName(banner.getName());
+            for(CharacterModel c: banner.getCharacters()){
+                model.getCharacters().add(c);
+            }
             bannerRepository.save(model);
             return ResponseEntity.ok("banner created");
         }

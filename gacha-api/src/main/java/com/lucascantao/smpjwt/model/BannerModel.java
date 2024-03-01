@@ -32,7 +32,7 @@ public class BannerModel {
     
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "banner_characters",
         joinColumns = @JoinColumn(name = "banner_id", referencedColumnName = "id"),
