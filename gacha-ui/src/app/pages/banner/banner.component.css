@@ -5,6 +5,9 @@
     background-position: center;
 }
 
-#wish {
-    background-image: url("../../../assets/images/wish.webp");
+#card {
+    background-image: url("../../../assets/images/background_shop.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }

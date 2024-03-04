@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UuarioService } from '../../service/usuario.service';
+import { UsuarioService } from '../../service/usuario.service';
 import { Usuario } from '../../models/usuario';
 import { NgFor, NgIf } from '@angular/common';
 
@@ -14,7 +14,7 @@ export class UserDetailsComponent implements OnInit{
 
   _userDetails!: Usuario;
 
-  constructor (private usuarioService:UuarioService) {}
+  constructor (private usuarioService:UsuarioService) {}
   
   ngOnInit(): void {
     this.usuarioService.getUserByToken().subscribe({

@@ -1,7 +1,7 @@
 <div id="banner" class="h-screen">
     <div *ngIf="_banners!=null" class="h-full flex flex-col justify-between">
 
-        <div class="flex items-center justify-between py-4 px-8">
+        <div class="flex items-center justify-between py-4 px-8 z-10">
             <div></div>
             <div class="flex">
                 <div *ngFor="let banner of _banners">
@@ -11,13 +11,22 @@
 
             <div class="bg-gray-600 rounded-full flex items-center justify-around text-gray-200 px-4">
                 <span id="wish"><img src="../../../assets/images/wish.webp" class="h-10" alt=""> </span>
-                <p class="font-bold text-lg">2</p>
+                <p class="font-bold text-lg">{{_pulls}}</p>
             </div>
         </div>
 
-        <div class="flex items-center justify-center">
-            <div class="border">
-                <p>{{_selected_banner?.name}}</p>
+        <div class="flex h-2/3 items-center justify-center relative">
+            <div class="bg-white h-full w-3/5 flex px-12 py-8 overflow-hidden relative">
+                <img src="../../../assets/images/characters/splashart/{{_selected_character?.name}}.png" alt="" class="absolute z-10">
+                <div class="z-10">
+                    <p class="text-4xl font-semibold">{{_selected_banner?.name}}</p>
+                    <div>
+                        <div (click)="selectCharacter(character)" *ngFor="let character of _selected_banner?.characters" class="border mb-2 rounded px-4 flex items-center justify-between bg-white text-gray-800 hover:bg-gray-700 hover:cursor-pointer hover:text-white">
+                            {{character.name}}
+                            <img src="../../../assets/images/characters/icons/{{character.name}}_Icon.webp" alt="" class="size-10">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -30,8 +39,10 @@
             <button (click)="pull(_selected_banner!.id, 1)" class="border font-semibold text-yellow-700 bg-white py-3 px-2 w-64 rounded-full mr-2 text-lg">Wish 1x</button>
         </div>
 
-        <div *ngIf="_showCard" class="absolute">
-            <app-pull-card [character]="_pull_character" [weapon]="_pull_weapon"></app-pull-card>
+        <div id="card" (click)="dismiss()" *ngIf="_showCard" class="absolute h-screen w-full z-20">
+            <div class="flex items-center justify-center h-full">
+                <app-pull-card [character]="_pull_character" [weapon]="_pull_weapon"></app-pull-card>
+            </div>
         </div>
     
     </div>

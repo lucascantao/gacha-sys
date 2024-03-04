@@ -1,18 +1,20 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../../enviroment";
+import { Usuario } from "../models/usuario";
+import { Observable } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
 })
-export class UuarioService {
+export class UsuarioService {
 
     private api = environment.serverApi;
 
     constructor(private http:HttpClient) {}
 
-    getUserByToken() {
-        return this.http.get<any>(this.api+'/user/getUserToken');
+    getUserByToken(): Observable<Usuario> {
+        return this.http.get<Usuario>(this.api+'/user/getUserToken');
     }
 
 }
