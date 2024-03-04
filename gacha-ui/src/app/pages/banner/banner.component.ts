@@ -15,7 +15,8 @@ import { PullCardComponent } from '../components/pull-card/pull-card.component';
 })
 export class BannerComponent implements OnInit{
 
-  _banners?: Banner[]
+  _banners!: Banner[];
+  _selected_banner?: Banner;
 
   _pull_character?:Character;
   _pull_weapon?:Weapon;
@@ -28,6 +29,7 @@ export class BannerComponent implements OnInit{
     this.bannerService.listBanners().subscribe({
       next: r => {
         this._banners = r;
+        this._selected_banner = this._banners[0]
       }
     })
   }
@@ -55,6 +57,10 @@ export class BannerComponent implements OnInit{
     this._showCard = false;
     this._pull_character = undefined;
     this._pull_weapon = undefined;
+  }
+
+  selectBanner(banner:Banner) {
+    this._selected_banner = banner;
   }
 
   
