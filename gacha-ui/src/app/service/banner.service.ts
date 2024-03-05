@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../../enviroment";
+import { Banner } from "../models/banner";
 
 @Injectable({
     providedIn:'root'
@@ -13,6 +14,10 @@ export class BannerService {
     
     listBanners() {
         return this.http.get<any>(this.api+'/banner');
+    }
+
+    createBanner(banner: Banner){
+        this.http.post<any>(this.api+'/banner', banner);
     }
 
     pullCharacter(banner_id:number) {

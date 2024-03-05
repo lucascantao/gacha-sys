@@ -2,7 +2,7 @@
     <div *ngIf="_banners!=null" class="h-full flex flex-col justify-between">
 
         <div class="flex items-center justify-between py-4 px-8 z-10">
-            <div></div>
+            <div ><a href="/create-banner" ><p class="text-yellow-100 text-4x1">+</p></a></div>
             <div class="flex">
                 <div *ngFor="let banner of _banners" class="">
                     <div (click)="selectBanner(banner)" class="bg-white shadow border h-16 w-28 hover:cursor-pointer mr-4">

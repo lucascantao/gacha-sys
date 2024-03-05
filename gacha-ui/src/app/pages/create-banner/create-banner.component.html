@@ -1,0 +1,6 @@
+<div id="create-banner" class="h-screen">
+    <input type="text" placeholder="name">
+    <select name="characters" id="lelectCharacters">
+        <option *ngFor="let c of _characters" value="c.name">{{c.name}}</option>
+    </select>
+</div>
