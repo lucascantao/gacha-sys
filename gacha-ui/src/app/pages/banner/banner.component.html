@@ -4,31 +4,43 @@
         <div class="flex items-center justify-between py-4 px-8 z-10">
             <div></div>
             <div class="flex">
-                <div *ngFor="let banner of _banners">
-                    <div (click)="selectBanner(banner)" class="bg-white shadow border h-16 w-28 hover:cursor-pointer mr-4"></div>
+                <div *ngFor="let banner of _banners" class="">
+                    <div (click)="selectBanner(banner)" class="bg-white shadow border h-16 w-28 hover:cursor-pointer mr-4">
+                    <img src="../../../assets/images/characters/splashart/{{banner.characters[0].name}}.png" class="size" alt="">
+                    </div>
                 </div>
             </div>
 
             <div class="bg-gray-600 rounded-full flex items-center justify-around text-gray-200 px-4">
-                <span id="wish"><img src="../../../assets/images/wish.webp" class="h-10" alt=""> </span>
+                <span id="wish"><img src="../../../assets/images/menu/icons/wish.webp" class="h-10" alt=""> </span>
                 <p class="font-bold text-lg">{{_pulls}}</p>
             </div>
         </div>
 
+        <!--BANNER CONTAINER -->
         <div class="flex h-2/3 items-center justify-center relative">
-            <div class="bg-white h-full w-3/5 flex px-12 py-8 overflow-hidden relative">
-                <img src="../../../assets/images/characters/splashart/{{_selected_character?.name}}.png" alt="" class="absolute z-10">
-                <div class="z-10">
-                    <p class="text-4xl font-semibold">{{_selected_banner?.name}}</p>
+            <div class="bg-white h-full w-3/5 grid grid-cols-2 px-12 py-8 overflow-hidden relative">
+                <img src="../../../assets/images/background/background_banner.png" alt="" class="absolute z-0 h-full"> <!--BANNER BACKGROUND-->
+                <img src="../../../assets/images/characters/splashart/{{_selected_character?.name}}.png" alt="" class="absolute z-10 self-center"> <!--SELECTED CHARACTER BACKGROUND-->
+                
+                <!--BANNER CONTENT -->
+                <div class="flex flex-col justify-between z-10">
+                    <p class="text-4xl text-white font-semibold drop-shadow-[0_1.9px_1.9px_rgba(0,0,0,1)]">{{_selected_banner?.name}}</p>
                     <div>
-                        <div (click)="selectCharacter(character)" *ngFor="let character of _selected_banner?.characters" class="border mb-2 rounded px-4 flex items-center justify-between bg-white text-gray-800 hover:bg-gray-700 hover:cursor-pointer hover:text-white">
+                        <div (click)="selectCharacter(character)" *ngFor="let character of _selected_banner?.characters" 
+                        class="mb-2 rounded px-4 flex items-center bg-gradient-to-r from-blue-300 to-transparent text-gray-200 hover:cursor-pointer">
+                            <img src="../../../assets/images/characters/icons/{{character.name}}_Icon.webp" alt="" class="size-8 mr-2">
                             {{character.name}}
-                            <img src="../../../assets/images/characters/icons/{{character.name}}_Icon.webp" alt="" class="size-10">
                         </div>
                     </div>
                 </div>
+                <div>
+                    blank
+                </div>
+                <!--BANNER CONTENT END -->
             </div>
         </div>
+        <!--BANNER CONTAINER END-->
 
         <div class="flex items-center justify-between px-10 py-8">
             <div class="text-gray-500 font-bold">
@@ -41,6 +53,7 @@
 
         <div id="card" (click)="dismiss()" *ngIf="_showCard" class="absolute h-screen w-full z-20">
             <div class="flex items-center justify-center h-full">
+                <div @wishWhiteFadeOut class="absolute h-full w-full bg-white opacity-0"></div>
                 <app-pull-card [character]="_pull_character" [weapon]="_pull_weapon"></app-pull-card>
             </div>
         </div>

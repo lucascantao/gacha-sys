@@ -6,14 +6,23 @@ import { Character } from '../../models/character';
 import { Weapon } from '../../models/weapon';
 import { PullCardComponent } from '../components/pull-card/pull-card.component';
 import { UsuarioService } from '../../service/usuario.service';
-import { Usuario } from '../../models/usuario';
+import { animate, style, transition, trigger } from '@angular/animations';
+
 
 @Component({
   selector: 'app-banner',
   standalone: true,
   imports: [NgIf, NgFor, PullCardComponent],
   templateUrl: './banner.component.html',
-  styleUrl: './banner.component.css'
+  styleUrl: './banner.component.css',
+  animations: [
+    trigger('wishWhiteFadeOut', [
+      transition(':enter', [
+        style({opacity: 1}),
+        animate('1s', style({opacity: 0}))
+      ])
+    ])
+  ]
 })
 export class BannerComponent implements OnInit{
 
@@ -74,6 +83,7 @@ export class BannerComponent implements OnInit{
 
   selectBanner(banner:Banner) {
     this._selected_banner = banner;
+    this.selectCharacter(banner.characters[0]);
   }
 
   selectCharacter(character:Character) {
