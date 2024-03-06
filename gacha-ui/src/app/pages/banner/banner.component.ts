@@ -7,6 +7,7 @@ import { Weapon } from '../../models/weapon';
 import { PullCardComponent } from '../components/pull-card/pull-card.component';
 import { UsuarioService } from '../../service/usuario.service';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { environment } from '../../../../enviroment';
 
 
 @Component({
@@ -36,6 +37,8 @@ export class BannerComponent implements OnInit{
   _pull_weapon?:Weapon;
 
   _showCard = false;
+
+  _gDrive = environment.gDriveApi;
 
   constructor(private bannerService:BannerService, private usuarioService: UsuarioService) {}
   

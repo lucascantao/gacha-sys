@@ -4,6 +4,7 @@ import { CharacterService } from '../../service/character.service';
 import { Banner } from '../../models/banner';
 import { Character } from '../../models/character';
 import { NgFor } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-banner',
@@ -14,10 +15,15 @@ import { NgFor } from '@angular/common';
 })
 export class CreateBannerComponent implements OnInit{
 
-  _banner?:Banner;
+  _banner:Banner = {
+    id: undefined, 
+    name: '',
+    characters: []
+
+  };
   _characters!: Character[];
 
-  constructor(private bannerService:BannerService, private characterService:CharacterService) {}
+  constructor(private bannerService:BannerService, private characterService:CharacterService, private router:Router) {}
 
   ngOnInit(): void {
     this.characterService.listCharacters().subscribe({
@@ -26,7 +32,20 @@ export class CreateBannerComponent implements OnInit{
   }
 
   saveBanner(){
-    this.bannerService.createBanner(this._banner!);
+    this.bannerService.createBanner(this._banner!).subscribe({next: r => this.router.navigateByUrl('/banner')});
+  }
+
+  setName(name: string) {
+    this._banner.name = name;
+  }
+
+  selectCharacter(name: string){
+    console.log(name)
+    this._characters.forEach(c => {
+      if(c.name === name && !this._banner.characters.includes(c)){
+        this._banner.characters.push(c)
+      }
+    })
   }
 
 }

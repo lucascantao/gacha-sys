@@ -1,6 +1,9 @@
 <div id="create-banner" class="h-screen">
-    <input type="text" placeholder="name">
-    <select name="characters" id="lelectCharacters">
-        <option *ngFor="let c of _characters" value="c.name">{{c.name}}</option>
+    <input #name type="text" placeholder="name" (input)="setName(name.value)">
+    <div *ngFor="let c of _banner.characters" >{{c.name}}</div>
+    <select #characters name="characters" id="lelectCharacters" (change)="selectCharacter(characters.value)">
+        <option default>Select a character</option>
+        <option *ngFor="let c of _characters" value="{{c.name}}">{{c.name}}</option>
     </select>
+    <button (click)="saveBanner()">save</button>
 </div>

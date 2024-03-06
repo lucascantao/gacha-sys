@@ -17,7 +17,7 @@ export class BannerService {
     }
 
     createBanner(banner: Banner){
-        this.http.post<any>(this.api+'/banner', banner);
+        return this.http.post<any>(this.api+'/banner', banner);
     }
 
     pullCharacter(banner_id:number) {

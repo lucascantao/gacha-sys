@@ -2,3 +2,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --url-background-menu: 'https://drive.google.com/thumbnail?id=1gyD88LiQW2mtos5JNgB4RnV-v675RVEu';
+    --url-background-banner: 'https://drive.google.com/thumbnail?id=1sfOABRsZgOC_f5FtpwcNTzFkr0JoLRgC';
+    --url-background-shop: 'https://drive.google.com/thumbnail?id=1phAg12py9FALsA2Dy03a2WZmu8SfERzY';
+}
