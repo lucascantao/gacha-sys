@@ -48,9 +48,9 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody RegisterDTO register) {
+    public ResponseEntity<UserEntity> register(@RequestBody RegisterDTO register) {
         if (userRepository.existsByEmail(register.getEmail())) {
-            return new ResponseEntity<>("username already existed", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
 
         UserEntity user = new UserEntity();
@@ -58,9 +58,9 @@ public class AuthController {
         user.setEmail(register.getEmail());
         user.setPassword(passwordEncoder.encode(register.getPassword()));
 
-        userRepository.save(user);
+        user = userRepository.save(user);
 
-        return new ResponseEntity<>("username registered", HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     
