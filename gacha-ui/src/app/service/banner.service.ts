@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../../enviroment";
 import { Banner } from "../models/banner";
+import { Observable } from "rxjs";
 
 @Injectable({
     providedIn:'root'
@@ -16,7 +17,7 @@ export class BannerService {
         return this.http.get<any>(this.api+'/banner');
     }
 
-    createBanner(banner: Banner){
+    createBanner(banner: Banner) {
         return this.http.post<any>(this.api+'/banner', banner);
     }
 

@@ -3,6 +3,7 @@ package com.lucascantao.smpjwt.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,17 +45,18 @@ public class BannerController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createBanner(@RequestBody BannerDTO banner) {
+    public ResponseEntity<BannerModel> createBanner(@RequestBody BannerDTO banner) {
         if (!bannerRepository.existsByName(banner.getName())) {
             BannerModel model = new BannerModel();
             model.setName(banner.getName());
             for(CharacterModel c: banner.getCharacters()){
                 model.getCharacters().add(c);
             }
-            bannerRepository.save(model);
-            return ResponseEntity.ok("banner created");
+            model = bannerRepository.save(model);
+            return new ResponseEntity<>(model, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
-        return ResponseEntity.ok("name already exists");
     }
 
 }

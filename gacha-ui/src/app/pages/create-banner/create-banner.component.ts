@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 export class CreateBannerComponent implements OnInit{
 
   _banner:Banner = {
-    id: undefined, 
+    id: null, 
     name: '',
     characters: []
 
@@ -27,12 +27,19 @@ export class CreateBannerComponent implements OnInit{
 
   ngOnInit(): void {
     this.characterService.listCharacters().subscribe({
-      next: r => this._characters = r
+      next: r => this._characters = r,
     })
   }
 
   saveBanner(){
-    this.bannerService.createBanner(this._banner!).subscribe({next: r => this.router.navigateByUrl('/banner')});
+    this.bannerService.createBanner(this._banner).subscribe({
+      next: r => {
+        this.router.navigateByUrl('/banner')
+      },
+      error: e => {
+        console.log(e)
+      }
+    });
   }
 
   setName(name: string) {
