@@ -2,5 +2,7 @@ export interface Character {
     id: number,
     name: string,
     tier: number,
-    bio: string
+    bio: string,
+    url_splashart: string,
+    url_icon: string
 }
