@@ -2,9 +2,14 @@
     <div class="bg-white min-h-36 w-1/3 flex flex-col px-4 py-6 rounded">
         <input #name type="text" placeholder="Banner name" (input)="setName(name.value)" class="mb-4 p-2 placeholder-gray-300 text-gray-500 focus:outline-none bg-none">
         <div *ngFor="let c of _banner.characters" >
-            <div class=" flex mb-4 text-gray-400 border py-2 px-4 rounded">
-                <img src="https://lh3.googleusercontent.com/d/{{c.url_icon}}" alt="" class="size-8 mr-4">
-                <p>{{c.name}}</p>
+            <div class=" flex items-center justify-between mb-4 text-gray-400 border py-2 px-4 rounded">
+                <div class="flex items-center">
+                    <img src="https://lh3.googleusercontent.com/d/{{c.url_icon}}" alt="" class="size-8 mr-4">
+                    <p>{{c.name}}</p>
+                </div>
+                <button (click)="removeCharacter(c)" class="text-red-900 text-sm font-semibold">
+                    remove
+                </button>
             </div>
         </div>
         <select #characters name="characters" id="lelectCharacters" (change)="selectCharacter(characters.value)"

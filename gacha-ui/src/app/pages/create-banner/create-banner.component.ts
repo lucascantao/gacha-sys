@@ -55,4 +55,8 @@ export class CreateBannerComponent implements OnInit{
     })
   }
 
+  removeCharacter(c:Character) {
+    this._banner.characters = this._banner.characters.filter(char => char !== c);
+  }
+
 }
