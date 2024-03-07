@@ -59,6 +59,8 @@ export class BannerComponent implements OnInit{
   }
 
   pull(banner_id:number, quantity:number) {
+    if(this._pulls <= 0){return}
+    
     this._pulls -= 1;
     this.dismiss()
     this.bannerService.pullCharacter(banner_id).subscribe({
