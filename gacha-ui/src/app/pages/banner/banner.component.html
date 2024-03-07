@@ -46,7 +46,9 @@
         <div class="flex items-center justify-between px-10 py-8">
             <div class="text-gray-500 font-bold">
                 <button class="bg-white border py-1 px-2 w-36 rounded-full mr-2">Shop</button>
-                <button class="bg-white border py-1 px-2 w-36 rounded-full mr-2">Detail</button>
+                <a href="/user-details">
+                    <button class="bg-white border py-1 px-2 w-36 rounded-full mr-2">User Detail</button>
+                </a>
                 <button class="bg-white border py-1 px-2 w-36 rounded-full mr-2">History</button>
             </div>
             <button (click)="pull(_selected_banner!.id!, 1)" class="border font-semibold text-yellow-700 bg-white py-3 px-2 w-64 rounded-full mr-2 text-lg">Wish 1x</button>

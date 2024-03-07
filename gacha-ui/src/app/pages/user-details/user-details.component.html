@@ -1,16 +1,21 @@
-<div *ngIf="_userDetails!=null">
-    <h1>{{_userDetails.name}}</h1>
+<div id="user-menu" class="h-screen flex items-center justify-center bg-gray-600">
+    <div *ngIf="_userDetails!=null" class="bg-white w-1/2 rounded flex flex-col p-6 shadow">
+        <p class="text-gray-600 text-sm">username</p>
+        <h1 class="text-5x1 text-xl">{{_userDetails.name}}</h1>
+        <p class="text-gray-600 text-sm">characters</p>
+        <div class="grid grid-cols-4">
+            <div *ngFor="let character of _userDetails.characters"> 
+                <img src="../../../assets/images/characters/icons/{{character.name}}.webp" alt="" class="border-2 rounded size-12 p-1 mb-2"> 
+            </div>
+        </div>
+    
+        <p class="text-gray-600 text-sm">weapons</p>
+        <div class="grid grid-cols-4">
+            <div *ngFor="let weapon of _userDetails.weapons"> 
+                <img src="../../../assets/images/weapons/{{weapon.name}}.webp" alt="" class="border-2 rounded size-12 p-1 mb-2"> 
+            </div>
+        </div>
     
     
-    <p>characters</p>
-    <div>
-        <p *ngFor="let character of _userDetails.characters"> {{character.name}} </p>
     </div>
-
-    <p>weapons</p>
-    <div>
-        <p *ngFor="let weapon of _userDetails.weapons"> {{weapon.name}} </p>
-    </div>
-
-
 </div>
