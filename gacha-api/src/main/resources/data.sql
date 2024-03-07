@@ -33,4 +33,5 @@ INSERT INTO character (tier, bio, name) VALUES(5, 'Zombi child', 'Qiqi');
 
 INSERT INTO banner_characters (banner_id, character_id) VALUES (1, 4);
 INSERT INTO banner_characters (banner_id, character_id) VALUES (1, 5);
+INSERT INTO banner_characters (banner_id, character_id) VALUES (1, 6);
 INSERT INTO banner_characters (banner_id, character_id) VALUES (1, 7);
