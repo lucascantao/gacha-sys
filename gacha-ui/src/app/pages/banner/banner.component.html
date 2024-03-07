@@ -8,7 +8,7 @@
             <div class="flex">
                 <div *ngFor="let banner of _banners" class="">
                     <div (click)="selectBanner(banner)" class="bg-white shadow border h-16 w-28 hover:cursor-pointer mr-4">
-                    <img src="{{_gDrive+banner.characters[0].url_splashart}}" class="size" alt="">
+                    <img src="../../../assets/images/characters/splashart/{{banner.characters[0].name}}.webp" class="size" alt="">
                     </div>
                 </div>
             </div>
@@ -21,8 +21,8 @@
         <!--BANNER CONTAINER -->
         <div class="flex h-2/3 items-center justify-center relative">
             <div class="bg-white h-full w-3/5 grid grid-cols-2 px-12 py-8 overflow-hidden relative">
-                <img src="{{_gDrive}}1sfOABRsZgOC_f5FtpwcNTzFkr0JoLRgC" alt="" class="absolute z-0 h-full"> <!--BANNER BACKGROUND-->
-                <img src="{{_gDrive+_selected_character?.url_splashart}}" alt="" class="absolute z-10 h-full"> <!--SELECTED CHARACTER BACKGROUND-->
+                <img src="../../../assets/images/background/background_banner.png" alt="" class="absolute z-0 h-full"> <!--BANNER BACKGROUND-->
+                <img src="../../../assets/images/characters/splashart/{{_selected_character?.name}}.webp" alt="" class="absolute z-10 h-full"> <!--SELECTED CHARACTER BACKGROUND-->
                 
                 <!--BANNER CONTENT -->
                 <div class="flex flex-col justify-between z-10">
@@ -30,7 +30,7 @@
                     <div>
                         <div (click)="selectCharacter(character)" *ngFor="let character of _selected_banner?.characters" 
                         class="mb-2 rounded px-4 flex items-center bg-gradient-to-r from-blue-300 to-transparent text-gray-200 hover:cursor-pointer">
-                            <img src="https://drive.google.com/thumbnail?id={{character?.url_icon}}" alt="" class="size-8 mr-2">
+                            <img src="../../../assets/images/characters/icons/{{character.name}}.webp" alt="" class="size-8 mr-2">
                             {{character.name}}
                         </div>
                     </div>

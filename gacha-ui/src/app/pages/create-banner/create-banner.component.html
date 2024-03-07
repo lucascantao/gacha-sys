@@ -4,7 +4,7 @@
         <div *ngFor="let c of _banner.characters" >
             <div class=" flex items-center justify-between mb-4 text-gray-400 border py-2 px-4 rounded">
                 <div class="flex items-center">
-                    <img src="https://lh3.googleusercontent.com/d/{{c.url_icon}}" alt="" class="size-8 mr-4">
+                    <img src="../../../assets/images/characters/icons/{{c.name}}.webp" alt="" class="size-8 mr-4">
                     <p>{{c.name}}</p>
                 </div>
                 <button (click)="removeCharacter(c)" class="text-red-900 text-sm font-semibold">

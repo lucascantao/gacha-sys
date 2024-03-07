@@ -23,9 +23,5 @@ public class CharacterModel {
     private String name;
 
     private String bio;
-
-    private String url_splashart;
-
-    private String url_icon;
     
 }

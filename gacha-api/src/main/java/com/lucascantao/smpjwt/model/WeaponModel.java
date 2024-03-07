@@ -20,6 +20,4 @@ public class WeaponModel {
 
     private short tier;
 
-    private String icon;
-
 }
