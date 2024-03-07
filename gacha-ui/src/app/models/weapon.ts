@@ -1,5 +1,6 @@
 export interface Weapon {
     id:number,
     name: string,
-    tier: number
+    tier: number,
+    icon:string
 }
