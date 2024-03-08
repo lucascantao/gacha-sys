@@ -1,4 +1,4 @@
-<div id="user-menu" class="min-h-screen px-8 py-6 bg-gray-600">
+<div id="user-menu" class="min-h-screen px-8 py-6">
     <div class="mb-4">
         <a href="/banner">
             <button class="bg-white border py-1 px-2 w-36 rounded-full mr-2 text-gray-500 font-semibold">back</button>
@@ -6,8 +6,9 @@
     </div>
     <div *ngIf="_userDetails!=null" class="bg-white w-1/2 rounded p-6 shadow">
         <div class="mb-2">
-            <p class="text-gray-500 text-sm">username</p>
+            <p class="text-gray-500 text-sm">user data</p>
             <h1>{{_userDetails.name}}</h1>
+            <h1>{{_userDetails.email}}</h1>
         </div>
 
         <div class="mb-2">
