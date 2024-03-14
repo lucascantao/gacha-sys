@@ -1,10 +1,9 @@
-<div id="banner" class="h-screen">
-    <div *ngIf="_banners!=null" class="h-full flex flex-col justify-between">
+<div id="banner" class="h-screen relative">
+    <div class="h-full w-full absolute bg-[rgba(0,0,0,0.2)]"></div>
+    <div *ngIf="_banners!=null" class="h-full flex flex-col justify-between relative">
 
         <div class="flex items-center justify-between py-4 px-8 z-10">
-            <div ><a href="/create-banner" >
-                <button class="bg-white border py-1 px-2 w-36 rounded-full mr-2 text-gray-500 font-semibold">Create Banner</button>
-            </a></div>
+            <div ></div>
             <div class="flex">
                 <div *ngFor="let banner of _banners" class="">
                     <div (click)="selectBanner(banner)" class="bg-white shadow border h-16 w-28 hover:cursor-pointer mr-4">
@@ -46,11 +45,11 @@
         <div class="flex items-center justify-between px-10 py-8">
             <div class="text-gray-500 font-bold">
                 <button class="bg-white border py-1 px-2 w-36 rounded-full mr-2">Shop</button>
-                <a href="/user-details">
-                    <button class="bg-white border py-1 px-2 w-36 rounded-full mr-2">User Detail</button>
+                <a href="">
+                    <button class="bg-white border py-1 px-2 w-36 rounded-full mr-2">Details</button>
                 </a>
-                <a href="/login">
-                    <button class="bg-white border py-1 px-2 w-36 rounded-full mr-2">Login</button>
+                <a href="">
+                    <button class="bg-white border py-1 px-2 w-36 rounded-full mr-2">History</button>
                 </a>
             </div>
             <button (click)="pull(_selected_banner!.id!, 1)" class="border font-semibold text-yellow-700 bg-white py-3 px-2 w-64 rounded-full mr-2 text-lg">Wish 1x</button>
@@ -63,6 +62,11 @@
             </div>
         </div>
     
+    </div>
+    <div class="flex flex-col right-10 top-1/2 text-gray-100 font-semibold absolute">
+        <a href="/login"><button class="bg-transparent border py-1 px-2 w-36 rounded-full mb-2 hover:border-white hover:text-white">Login</button></a>
+        <a href="/create-banner"><button class="bg-transparent border py-1 px-2 w-36 rounded-full mb-2 hover:border-white text-white">Create Banner</button></a>
+        <a href="/user-details"><button class="bg-transparent border py-1 px-2 w-36 rounded-full mb-2 hover:border-white text-white">User Details</button></a>
     </div>
     
 </div>

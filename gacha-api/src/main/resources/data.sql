@@ -1,6 +1,6 @@
 INSERT INTO user_table (name, email, password, pulls) VALUES('user', 'user@email.com', '$2a$12$XrOvnti4NJAzdeOA2KP/sevaog.fRuG3QpxMbNn2oC83m8zexz2Oe', 90);
 
-INSERT INTO banner (name) VALUES('Favonious Festival');
+-- INSERT INTO banner (name) VALUES('Favonious Festival');
 
 INSERT INTO weapon (name, tier) VALUES ('White Tassel', 3);
 INSERT INTO weapon (name, tier) VALUES ('White Iron Greatsword', 3);
@@ -30,8 +30,8 @@ INSERT INTO character (tier, bio, name) VALUES(4, 'Cryon Num', 'Rosaria');
 INSERT INTO character (tier, bio, name) VALUES(4, 'Favonious Alchemist', 'Sucrose');
 INSERT INTO character (tier, bio, name) VALUES(5, 'Firecracker Girl', 'Yoimiya');
 INSERT INTO character (tier, bio, name) VALUES(5, 'Zombi child', 'Qiqi');
-
-INSERT INTO banner_characters (banner_id, character_id) VALUES (1, 4);
-INSERT INTO banner_characters (banner_id, character_id) VALUES (1, 5);
-INSERT INTO banner_characters (banner_id, character_id) VALUES (1, 6);
-INSERT INTO banner_characters (banner_id, character_id) VALUES (1, 7);
+                     
+-- INSERT INTO banner_characters (banner_id, character_id) VALUES (1, 4);
+-- INSERT INTO banner_characters (banner_id, character_id) VALUES (1, 5);
+-- INSERT INTO banner_characters (banner_id, character_id) VALUES (1, 6);
+-- INSERT INTO banner_characters (banner_id, character_id) VALUES (1, 7);
