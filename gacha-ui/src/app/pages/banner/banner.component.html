@@ -18,10 +18,10 @@
             </div>
         </div>
         <!--BANNER CONTAINER -->
-        <div class="flex h-2/3 items-center justify-center relative">
-            <div class="bg-white h-full w-3/5 grid grid-cols-2 px-12 py-8 overflow-hidden relative">
+        <div class="flex lg:h-2/3 md:h-2/5 items-center justify-center relative">
+            <div class="bg-white h-full lg:w-3/5 md:w-4/6 grid grid-cols-2 px-12 py-8 overflow-hidden relative">
                 <img src="../../../assets/images/background/background_banner.png" alt="" class="absolute z-0 h-full"> <!--BANNER BACKGROUND-->
-                <img src="../../../assets/images/characters/splashart/{{_selected_character?.name}}.webp" alt="" class="absolute z-10"> <!--SELECTED CHARACTER BACKGROUND-->
+                <img src="../../../assets/images/characters/splashart/{{_selected_character?.name}}.webp" alt="" class="absolute z-10 self-center"> <!--SELECTED CHARACTER BACKGROUND-->
                 
                 <!--BANNER CONTENT -->
                 <div class="flex flex-col justify-between z-10">
@@ -57,17 +57,18 @@
 
         <div id="card" (click)="dismiss()" *ngIf="_showCard" class="absolute h-screen w-full z-20">
             <div class="flex items-center justify-center h-full bg-[rgba(0,0,0,0.5)]">
-                <div @wishWhiteFadeOut class="absolute h-full w-full bg-white opacity-0"></div>
+                <div class="absolute h-full w-full opacity-0"></div>
                 <app-pull-card [character]="_pull_character" [weapon]="_pull_weapon"></app-pull-card>
             </div>
         </div>
     
     </div>
-    <div class="flex flex-col right-10 top-1/2 text-gray-100 font-semibold absolute">
-        <a href="/login"><button class="bg-transparent border py-1 px-2 w-36 rounded-full mb-2 hover:border-white hover:text-white">Login</button></a>
-        <a href="/create-banner"><button class="bg-transparent border py-1 px-2 w-36 rounded-full mb-2 hover:border-white text-white">Create Banner</button></a>
-        <a href="/user-details"><button class="bg-transparent border py-1 px-2 w-36 rounded-full mb-2 hover:border-white text-white">User Details</button></a>
-        <a href="/character-selection"><button class="bg-transparent border py-1 px-2 w-36 rounded-full mb-2 hover:border-white text-white">Characters</button></a>
+    <div class="flex flex-col items-center right-10 top-1/2 text-gray-100 font-semibold absolute">
+        <p class="text-blue-50 text-sm mb-2">Functions menu</p>
+        <a href="/login"><button class="border py-1 px-2 w-36 rounded-full mb-2 hover:border-white hover:text-white">Login</button></a>
+        <a href="/create-banner"><button class="border py-1 px-2 w-36 rounded-full mb-2 hover:border-white text-white">Create Banner</button></a>
+        <a href="/user-details"><button class="border py-1 px-2 w-36 rounded-full mb-2 hover:border-white text-white">User Details</button></a>
+        <a href="/character-selection"><button class="border py-1 px-2 w-36 rounded-full mb-2 hover:border-white text-white">Characters</button></a>
     </div>
     
 </div>
