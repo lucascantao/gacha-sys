@@ -2,9 +2,12 @@
     <div class="col-span-3 border flex flex-col justify-between px-4 py-1">
         <div>
             <p>Character Selection</p>
-            <div class="grid grid-cols-4 gap-2">
-                <div *ngFor="let character of _characters" class="border ">
-                    <p>{{character.name}}</p>
+            <div class="grid lg:grid-cols-5 lg:gap-4 md:grid-cols-4 md:gap-2">
+                <div *ngFor="let character of _characters" class="border rounded shadow hover:cursor-pointer relative">
+                    <div *ngIf="character.tier===5" class="bg-[rgb(255,196,109)] size-full absolute z-0"></div>
+                    <div *ngIf="character.tier===4" class="bg-[rgb(156,130,216)] size-full absolute z-0"></div>
+                    <img src="../../../assets/images/characters/icons/{{character.name}}.webp" alt="" class="w-full relative z-10">
+                    <p class="bg-white text-center relative z-10">{{character.name}}</p>
                 </div>
             </div>
         </div>
