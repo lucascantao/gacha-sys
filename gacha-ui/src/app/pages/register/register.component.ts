@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AutenticacaoService } from '../service/autenticacao.service';
+import { AutenticacaoService } from '../../service/autenticacao.service';
 import { Router } from '@angular/router';
 
 @Component({

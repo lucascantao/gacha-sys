@@ -4,7 +4,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { authGuard } from './utils/auth.guard';
 import { UserDetailsComponent } from './pages/user-details/user-details.component';
 import { CreateBannerComponent } from './pages/create-banner/create-banner.component';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './pages/register/register.component';
 import { CharacterSelectionComponent } from './pages/character-selection/character-selection.component';
 
 export const routes: Routes = [
