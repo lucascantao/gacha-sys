@@ -95,6 +95,14 @@ export class BannerComponent implements OnInit{
     this._selected_character = character;
   }
 
+  getT4() {
+    return this._selected_banner?.characters.filter(c => c.tier===4)!;
+  }
+
+  getT5() {
+    return this._selected_banner?.characters.filter(c => c.tier===5)!;
+  }
+
   
 
 }
