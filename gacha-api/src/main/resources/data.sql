@@ -20,16 +20,27 @@ INSERT INTO weapon (name, tier) VALUES ('Skyward Pride', 5);
 INSERT INTO weapon (name, tier) VALUES ('Mistsplitter Reforged', 5);
 INSERT INTO weapon (name, tier) VALUES ('Crane 27s Echoing Call', 5);
 
-INSERT INTO character (tier, bio, name) VALUES(5, 'Funerary Director', 'Hu Tao');
-INSERT INTO character (tier, bio, name) VALUES(5, 'Geo Archon', 'Zhongli');
-INSERT INTO character (tier, bio, name) VALUES(5, 'Hydro Archon', 'Furina');
 INSERT INTO character (tier, bio, name) VALUES(5, 'Knights of Favonious Leader', 'Jean');
+INSERT INTO character (tier, bio, name) VALUES(5, 'Cryo Aristocratic', 'Eula');
+INSERT INTO character (tier, bio, name) VALUES(5, 'Pyro Vigilant', 'Diluc');
+INSERT INTO character (tier, bio, name) VALUES(5, 'Explosives Kid', 'Klee');
+INSERT INTO character (tier, bio, name) VALUES(5, 'Hydro Astrologist', 'Mona');
+INSERT INTO character (tier, bio, name) VALUES(4, 'Adventurer Leader', 'Amber');
+INSERT INTO character (tier, bio, name) VALUES(4, 'Electro Librarian', 'Lisa');
+INSERT INTO character (tier, bio, name) VALUES(4, 'girl?????', 'Fischl');
+INSERT INTO character (tier, bio, name) VALUES(4, 'Cat Vine maker', 'Diona');
+INSERT INTO character (tier, bio, name) VALUES(4, 'Wolf Boy', 'Razor');
+INSERT INTO character (tier, bio, name) VALUES(4, 'Knight of Favonius commander', 'Kaeya');
 INSERT INTO character (tier, bio, name) VALUES(4, 'Favonious Maid Knight', 'Noelle');
 INSERT INTO character (tier, bio, name) VALUES(4, 'Unlucky Boy', 'Bennett');
 INSERT INTO character (tier, bio, name) VALUES(4, 'Cryon Num', 'Rosaria');
 INSERT INTO character (tier, bio, name) VALUES(4, 'Favonious Alchemist', 'Sucrose');
-INSERT INTO character (tier, bio, name) VALUES(5, 'Firecracker Girl', 'Yoimiya');
 INSERT INTO character (tier, bio, name) VALUES(5, 'Zombi child', 'Qiqi');
+INSERT INTO character (tier, bio, name) VALUES(5, 'Funerary Director', 'Hu Tao');
+INSERT INTO character (tier, bio, name) VALUES(5, 'Geo Archon', 'Zhongli');
+INSERT INTO character (tier, bio, name) VALUES(5, 'Firecracker Girl', 'Yoimiya');
+INSERT INTO character (tier, bio, name) VALUES(5, 'Hydro Archon', 'Furina');
+
                      
 -- INSERT INTO banner_characters (banner_id, character_id) VALUES (1, 4);
 -- INSERT INTO banner_characters (banner_id, character_id) VALUES (1, 5);
