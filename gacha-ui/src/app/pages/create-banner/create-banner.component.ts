@@ -3,13 +3,13 @@ import { BannerService } from '../../service/banner.service';
 import { CharacterService } from '../../service/character.service';
 import { Banner } from '../../models/banner';
 import { Character } from '../../models/character';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-banner',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, NgIf],
   templateUrl: './create-banner.component.html',
   styleUrl: './create-banner.component.css'
 })
@@ -22,6 +22,9 @@ export class CreateBannerComponent implements OnInit{
 
   };
   _characters!: Character[];
+
+  _t4Length = 3;
+  _t5Length = 1;
 
   constructor(private bannerService:BannerService, private characterService:CharacterService, private router:Router) {}
 
@@ -50,9 +53,26 @@ export class CreateBannerComponent implements OnInit{
     console.log(name)
     this._characters.forEach(c => {
       if(c.name === name && !this._banner.characters.includes(c)){
-        this._banner.characters.push(c)
+
+        const t5 = this._banner.characters.filter(c => c.tier===5)
+        const t4 = this._banner.characters.filter(c => c.tier===4)
+
+        if(c.tier === 5 && t5.length < this._t5Length )
+          this._banner.characters.push(c)
+
+        if(c.tier === 4 && t4.length < this._t4Length )
+          this._banner.characters.push(c)
+        
       }
     })
+  }
+
+  getT4() {
+    return this._banner.characters?.filter(c=> c.tier === 4);
+  }
+
+  getT5() {
+    return this._banner.characters?.filter(c=> c.tier === 5);
   }
 
   removeCharacter(c:Character) {
