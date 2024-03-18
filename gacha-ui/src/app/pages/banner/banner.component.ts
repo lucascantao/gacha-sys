@@ -33,8 +33,8 @@ export class BannerComponent implements OnInit{
 
   _selected_character?:Character;
 
-  _pull_character?:Character;
-  _pull_weapon?:Weapon;
+  _pull_character:Character[] = [];
+  _pull_weapon:Weapon[] = [];
 
   _showCard = false;
 
@@ -58,7 +58,7 @@ export class BannerComponent implements OnInit{
     })
   }
 
-  pull(banner_id:number, quantity:number) {
+  pull(banner_id:number) {
     if(this._pulls <= 0){return}
     
     this._pulls -= 1;
@@ -66,12 +66,12 @@ export class BannerComponent implements OnInit{
     this.bannerService.pullCharacter(banner_id).subscribe({
       next: r => {
         if(r!=null){
-          this._pull_character = r;
+          this._pull_character?.push(r);
           this._showCard = true;
         } else {
           this.bannerService.pullT3().subscribe({
             next: r => {
-              this._pull_weapon = r;
+              this._pull_weapon?.push(r);
               this._showCard = true;
             }
           })
@@ -80,10 +80,43 @@ export class BannerComponent implements OnInit{
     })
   }
 
+  pull10(banner_id:number) {
+    if(this._pulls < 10) {return}
+
+    this._pulls -= 10
+    this.dismiss()
+
+    for(var i = 0;i<10;i++) {
+
+      this.bannerService.pullCharacter(banner_id).subscribe({
+        next: r => {
+
+          if(r!=null){
+            this._pull_character?.push(r);
+          } else {
+            this.bannerService.pullT3().subscribe({
+              next: r => {
+                this._pull_weapon?.push(r);
+              }
+            })
+          }
+
+        }
+      })
+
+    }
+    console.log(this._pull_character)
+    console.log(this._pull_weapon)
+
+    this._showCard = true
+
+    
+  }
+
   dismiss(){
     this._showCard = false;
-    this._pull_character = undefined;
-    this._pull_weapon = undefined;
+    this._pull_character = [];
+    this._pull_weapon = [];
   }
 
   selectBanner(banner:Banner) {

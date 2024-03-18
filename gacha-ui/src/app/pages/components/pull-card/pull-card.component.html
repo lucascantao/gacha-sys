@@ -1,10 +1,18 @@
-<div>
-    <div *ngIf="character!=null" class="relative">
-        <img src="../../../assets/images/characters/splashart/{{character.name}}.webp" alt="">
-        <p class="absolute left-1/3 text-5x1 text-yellow-100 drop-shadow-[0_1.9px_1.9px_rgba(0,0,0,1)]">{{character.name}}</p>
+<!-- <div *ngIf="weapons.length == 1 || characters.length == 1">
+    <div *ngIf="characters!=null" class="relative">
+        <img src="../../../assets/images/characters/splashart/{{characters[0].name}}.webp" alt="">
+        <p class="absolute left-1/3 text-5x1 text-yellow-100 drop-shadow-[0_1.9px_1.9px_rgba(0,0,0,1)]">{{characters[0].name}}</p>
     </div>
-    <div *ngIf="weapon!=null">
-        <img src="../../../assets/images/weapons/{{weapon.name}}.webp" alt="">
-        <p class="absolute left-1/3 text-5x1 text-yellow-100 drop-shadow-[0_1.9px_1.9px_rgba(0,0,0,1)]">{{weapon.name}}</p>
+    <div *ngIf="weapons!=null">
+        <img src="../../../assets/images/weapons/{{weapons[0].name}}.webp" alt="">
+        <p class="absolute left-1/3 text-5x1 text-yellow-100 drop-shadow-[0_1.9px_1.9px_rgba(0,0,0,1)]">{{weapons[0].name}}</p>
     </div>
+</div> -->
+
+<div *ngIf="weapons.length > 1">
+
+    <p>HELLO</p>
+    <!-- <div *ngFor="let character of characters" class="relative h-48 w-28">
+        <img class="size-10" src="../../../assets/images/characters/splashart/{{character.name}}.webp" alt="">
+    </div> -->
 </div>

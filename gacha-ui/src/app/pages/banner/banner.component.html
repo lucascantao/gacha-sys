@@ -61,13 +61,14 @@
                     <button class="bg-white border py-1 px-2 w-36 rounded-full mr-2">History</button>
                 </a>
             </div>
-            <button (click)="pull(_selected_banner!.id!, 1)" class="border font-semibold text-yellow-700 bg-white py-3 px-2 w-64 rounded-full mr-2 text-lg">Wish 1x</button>
+            <button (click)="pull(_selected_banner!.id!)" class="border font-semibold text-yellow-700 bg-white py-3 px-2 w-64 rounded-full mr-2 text-lg">Wish 1x</button>
+            <button (click)="pull10(_selected_banner!.id!)" class="border font-semibold text-yellow-700 bg-white py-3 px-2 w-64 rounded-full mr-2 text-lg">Wish 10x</button>
         </div>
 
         <div id="card" (click)="dismiss()" *ngIf="_showCard" class="absolute h-screen w-full z-20">
             <div class="flex items-center justify-center h-full bg-[rgba(0,0,0,0.5)]">
                 <div class="absolute h-full w-full opacity-0"></div>
-                <app-pull-card [character]="_pull_character" [weapon]="_pull_weapon"></app-pull-card>
+                <app-pull-card [characters]="_pull_character" [weapons]="_pull_weapon"></app-pull-card>
             </div>
         </div>
     
